@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="vi">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#10110f">
+	<meta name="description" content="Hồ sơ game thủ của KietCute: vào game hết mình, ngoài đời vẫn đang lên cấp.">
+	<title>KietCute // Player Profile</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			color-scheme: dark;
+			--ink: #10110f;
+			--paper: #eeeee7;
+			--muted: #a4a69d;
+			--acid: #d7ff3f;
+			--orange: #ff6845;
+			--gold: #ffd166;
+			--line: rgba(238, 238, 231, .18);
+			font-family: "Space Mono", monospace;
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body {
+			min-width: 320px;
+			margin: 0;
+			background: var(--ink);
+			color: var(--paper);
+		}
+
+		a { color: inherit; }
+		.page { min-height: 100svh; overflow: hidden; }
+		.topbar {
+			position: relative;
+			z-index: 2;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			min-height: 74px;
+			padding: 0 clamp(20px, 5vw, 76px);
+			border-bottom: 1px solid var(--line);
+			background: var(--ink);
+		}
+		.wordmark {
+			color: var(--acid);
+			font-size: 13px;
+			font-weight: 700;
+			text-decoration: none;
+		}
+		.wordmark span { color: var(--paper); }
+		.top-label, .eyebrow, .micro-label {
+			font-size: 10px;
+			letter-spacing: 1.4px;
+			text-transform: uppercase;
+		}
+		.top-label { color: var(--muted); }
+
+		.hero {
+			position: relative;
+			display: grid;
+			min-height: min(760px, calc(100svh - 74px));
+			grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
+			align-items: center;
+			gap: 5vw;
+			padding: clamp(48px, 8vw, 112px) clamp(20px, 9vw, 140px);
+			isolation: isolate;
+		}
+		.hero::before {
+			position: absolute;
+			z-index: -2;
+			inset: 0;
+			background: radial-gradient(ellipse at 78% 45%, rgba(255, 209, 102, .26), transparent 30%),
+				radial-gradient(ellipse at 75% 55%, rgba(255, 104, 69, .16), transparent 38%),
+				linear-gradient(90deg, rgba(16, 17, 15, .97) 0%, rgba(16, 17, 15, .84) 45%, rgba(16, 17, 15, .42) 100%),
+				linear-gradient(0deg, var(--ink) 0%, transparent 28%, transparent 78%, rgba(16, 17, 15, .55) 100%),
+				url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=2000&q=85") center 42% / cover;
+			content: "";
+		}
+		.hero::after {
+			position: absolute;
+			z-index: -1;
+			inset: 0;
+			background-image: linear-gradient(rgba(238, 238, 231, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(238, 238, 231, .035) 1px, transparent 1px);
+			background-size: 48px 48px;
+			content: "";
+			mask-image: linear-gradient(90deg, black, transparent 85%);
+		}
+		.aura-orb {
+			position: absolute;
+			z-index: 0;
+			top: 50%;
+			right: 7%;
+			width: min(42vw, 540px);
+			aspect-ratio: 1;
+			border: 1px solid rgba(255, 209, 102, .55);
+			border-radius: 50%;
+			background: radial-gradient(circle, rgba(255, 209, 102, .24), rgba(255, 104, 69, .11) 34%, transparent 70%);
+			box-shadow: 0 0 70px rgba(255, 187, 67, .22), inset 0 0 65px rgba(255, 209, 102, .1);
+			transform: translateY(-50%);
+			animation: aura-pulse 4s ease-in-out infinite;
+		}
+		.aura-orb::before, .aura-orb::after {
+			position: absolute;
+			inset: 8%;
+			border: 1px solid rgba(255, 209, 102, .38);
+			border-radius: 50%;
+			content: "";
+		}
+		.aura-orb::after { inset: 18%; border-style: dashed; animation: orbit 32s linear infinite; }
+		.hero-copy, .profile { position: relative; z-index: 1; }
+		.hero-copy { max-width: 720px; animation: enter .7s both; }
+		.eyebrow { display: flex; align-items: center; gap: 10px; color: var(--acid); }
+		.eyebrow::before { width: 25px; height: 2px; background: var(--acid); content: ""; }
+		h1 {
+			margin: 18px 0 15px;
+			font-family: "Barlow Condensed", Impact, sans-serif;
+			font-size: clamp(76px, 13vw, 174px);
+			font-weight: 900;
+			line-height: .78;
+			text-transform: uppercase;
+		}
+		h1 span { display: block; color: var(--acid); }
+		.hero-subtitle {
+			margin: 0;
+			color: var(--gold);
+			font-family: "Barlow Condensed", Impact, sans-serif;
+			font-size: clamp(19px, 2.4vw, 29px);
+			font-weight: 700;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+		}
+		.intro {
+			max-width: 490px;
+			margin: 28px 0 30px;
+			color: #d0d1c9;
+			font-size: 13px;
+			line-height: 1.9;
+		}
+		.intro strong { color: var(--paper); }
+		.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+		.button {
+			display: inline-flex;
+			min-height: 48px;
+			align-items: center;
+			justify-content: center;
+			gap: 13px;
+			padding: 0 19px;
+			border: 1px solid var(--acid);
+			background: var(--acid);
+			color: var(--ink);
+			font-size: 11px;
+			font-weight: 700;
+			text-decoration: none;
+			text-transform: uppercase;
+			transition: transform .18s ease, background .18s ease;
+		}
+		.button:hover { transform: translateY(-3px); }
+		.button.secondary { border-color: var(--line); background: rgba(16, 17, 15, .45); color: var(--paper); }
+		.button.secondary:hover { border-color: var(--paper); }
+
+		.profile {
+			width: min(100%, 340px);
+			justify-self: end;
+			padding: 22px;
+			border: 1px solid rgba(238, 238, 231, .35);
+			background: rgba(16, 17, 15, .76);
+			backdrop-filter: blur(10px);
+			animation: enter .7s .15s both;
+		}
+		.profile-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+		.micro-label { color: var(--muted); }
+		.online { display: flex; align-items: center; gap: 7px; color: var(--acid); font-size: 9px; text-transform: uppercase; }
+		.online::before { width: 7px; height: 7px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 12px var(--acid); content: ""; }
+		.rank { padding: 21px 0 18px; }
+		.rank strong { display: block; margin-top: 8px; font-family: "Barlow Condensed", Impact, sans-serif; font-size: 39px; line-height: 1; text-transform: uppercase; }
+		.rank strong span { color: var(--orange); }
+		.aura-rating {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin: 0 0 17px;
+			padding: 12px 0;
+			border-top: 1px solid var(--line);
+			border-bottom: 1px solid var(--line);
+		}
+		.aura-rating span { color: var(--gold); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; }
+		.aura-rating strong { color: var(--gold); font-family: "Barlow Condensed", Impact, sans-serif; font-size: 32px; line-height: 1; }
+		.stat { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 13px 0; border-top: 1px solid var(--line); font-size: 10px; }
+		.stat span:first-child { color: var(--muted); }
+		.stat span:last-child { color: var(--paper); text-align: right; }
+		.profile-note { margin: 16px 0 0; padding: 12px; border-left: 2px solid var(--orange); background: rgba(255, 104, 69, .08); color: #e7c1b6; font-size: 10px; line-height: 1.7; }
+
+		.lower {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			border-top: 1px solid var(--line);
+			background: #171815;
+		}
+		.lower-item { min-height: 135px; padding: 25px clamp(20px, 5vw, 76px); border-right: 1px solid var(--line); }
+		.lower-item:last-child { border-right: 0; }
+		.lower-item .micro-label { color: var(--muted); }
+		.lower-item p { margin: 13px 0 0; font-family: "Barlow Condensed", Impact, sans-serif; font-size: 26px; font-weight: 700; text-transform: uppercase; }
+		.lower-item p em { color: var(--acid); font-style: normal; }
+		.dossier {
+			display: grid;
+			grid-template-columns: .9fr 1.1fr;
+			gap: clamp(36px, 8vw, 120px);
+			padding: clamp(66px, 9vw, 120px) clamp(20px, 9vw, 140px);
+			background: var(--paper);
+			color: var(--ink);
+		}
+		.section-kicker { color: #647022; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; }
+		.dossier h2 {
+			max-width: 520px;
+			margin: 18px 0;
+			font-family: "Barlow Condensed", Impact, sans-serif;
+			font-size: clamp(44px, 6vw, 78px);
+			font-weight: 900;
+			line-height: .9;
+			text-transform: uppercase;
+		}
+		.dossier h2 span { color: #a7432d; }
+		.dossier-intro { max-width: 420px; color: #55574f; font-size: 12px; line-height: 1.9; }
+		.build { align-self: center; }
+		.build-row { margin: 22px 0; }
+		.build-row-head { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 8px; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+		.build-row-head span:last-child { color: #77796f; }
+		.meter { height: 7px; background: #d4d5ca; }
+		.meter span { display: block; height: 100%; background: #9dc319; }
+		.build-row:nth-child(3) .meter span { background: #ed6a46; }
+		.build-row:nth-child(4) .meter span { background: #d3a92f; }
+		.achievements {
+			padding: clamp(64px, 8vw, 100px) clamp(20px, 9vw, 140px);
+			background: #171815;
+		}
+		.achievements-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 35px; }
+		.achievements h2 { margin: 12px 0 0; font-family: "Barlow Condensed", Impact, sans-serif; font-size: clamp(42px, 6vw, 72px); line-height: .9; text-transform: uppercase; }
+		.achievements-head p { max-width: 260px; margin: 0; color: var(--muted); font-size: 10px; line-height: 1.8; }
+		.trophy-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+		.trophy { min-height: 190px; padding: 24px; border-right: 1px solid var(--line); }
+		.trophy:last-child { border-right: 0; }
+		.trophy-number { color: var(--orange); font-family: "Barlow Condensed", Impact, sans-serif; font-size: 38px; font-weight: 800; }
+		.trophy h3 { margin: 18px 0 8px; font-family: "Barlow Condensed", Impact, sans-serif; font-size: 25px; text-transform: uppercase; }
+		.trophy p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.8; }
+		.final-call {
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 24px;
+			padding: 34px clamp(20px, 9vw, 140px);
+			background: var(--acid);
+			color: var(--ink);
+		}
+		.final-call p { margin: 0; font-family: "Barlow Condensed", Impact, sans-serif; font-size: clamp(26px, 4vw, 44px); font-weight: 800; line-height: .95; text-transform: uppercase; }
+		.final-call span { display: block; margin-top: 7px; font-family: "Space Mono", monospace; font-size: 9px; font-weight: 400; }
+		.final-call a { flex: 0 0 auto; padding: 14px 18px; border: 1px solid var(--ink); font-size: 10px; font-weight: 700; text-decoration: none; text-transform: uppercase; }
+		.final-call a:hover { background: var(--ink); color: var(--acid); }
+		footer { display: flex; justify-content: space-between; gap: 16px; padding: 18px clamp(20px, 5vw, 76px); color: var(--muted); font-size: 9px; }
+
+		@keyframes enter { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+		@keyframes aura-pulse { 50% { opacity: .7; box-shadow: 0 0 110px rgba(255, 187, 67, .34), inset 0 0 90px rgba(255, 209, 102, .17); } }
+		@keyframes orbit { to { transform: rotate(360deg); } }
+		@media (max-width: 760px) {
+			.topbar { min-height: 62px; }
+			.hero { min-height: auto; grid-template-columns: 1fr; gap: 42px; padding: 78px 24px 48px; }
+			.hero::before { background-position: 58% center; }
+			h1 { font-size: clamp(78px, 19vw, 132px); }
+			.aura-orb { top: 47%; right: -15%; width: 75vw; }
+			.profile { justify-self: start; }
+			.lower { grid-template-columns: 1fr; }
+			.lower-item { min-height: 102px; border-right: 0; border-bottom: 1px solid var(--line); }
+			.lower-item:last-child { border-bottom: 0; }
+			.dossier { grid-template-columns: 1fr; gap: 36px; }
+			.trophy { min-height: 170px; padding: 18px; }
+		}
+		@media (max-width: 420px) {
+			.top-label { font-size: 8px; letter-spacing: .7px; }
+			.hero { padding-inline: 18px; }
+			.actions { align-items: stretch; flex-direction: column; }
+			.button { width: 100%; }
+			.achievements-head, .final-call { align-items: flex-start; flex-direction: column; }
+			.achievements-head p { max-width: 100%; }
+			.trophy-grid { grid-template-columns: 1fr; }
+			.trophy { min-height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+			.trophy:last-child { border-bottom: 0; }
+			footer { flex-direction: column; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+		}
+	</style>
+</head>
+<body>
+	<div class="page">
+		<header class="topbar">
+			<a class="wordmark" href="#top">KC<span>_PROFILE</span></a>
+			<div class="top-label">Hồ sơ nhân vật // Mùa giải 2026</div>
+		</header>
+
+		<main id="top">
+			<section class="hero" aria-labelledby="hero-title">
+				<div class="aura-orb" aria-hidden="true"></div>
+				<div class="hero-copy">
+					<div class="eyebrow">Đang online · Sân vận động đã lên đèn</div>
+					<h1 id="hero-title">Kiet<span>Cute</span></h1>
+					<p class="hero-subtitle">Không cần spotlight. Tự phát sáng.</p>
+					<p class="intro">Game thủ hệ <strong>vào trận là cháy</strong>, xuất hiện là lobby tự nhiên im vài giây. Ngoài đời còn đang cày nhiệm vụ, nhưng khí chất thì đã mở khóa: tự tin, lầy lội, không bỏ đồng đội giữa combat.</p>
+					<div class="actions">
+						<a class="button" href="#loadout">Xem chỉ số aura <span aria-hidden="true">↘</span></a>
+						<a class="button secondary" href="#achievements">Vào sảnh danh vọng <span aria-hidden="true">↗</span></a>
+					</div>
+				</div>
+
+				<aside class="profile" id="player-card" aria-label="Thông tin nhân vật">
+					<div class="profile-head">
+						<span class="micro-label">Player card / 001</span>
+						<span class="online">Available</span>
+					</div>
+					<div class="rank">
+						<span class="micro-label">Danh hiệu hiện tại</span>
+						<strong>Ông vua <span>comeback</span></strong>
+					</div>
+					<div class="aura-rating"><span>Aura phát ra</span><strong>99.9</strong></div>
+					<div class="stat"><span>Main quest</span><span>Qua môn rồi tính</span></div>
+					<div class="stat"><span>Vai trò trong team</span><span>Shot-caller bất đắc dĩ</span></div>
+					<div class="stat"><span>Kỹ năng đặc biệt</span><span>Lật kèo phút 89</span></div>
+					<p class="profile-note">Học lực đang cập nhật bản vá. Vui lòng không tắt máy giữa chừng.</p>
+				</aside>
+			</section>
+
+			<section class="lower" id="contact" aria-label="Thông tin nhanh">
+				<div class="lower-item"><span class="micro-label">Chỉ số 01 / thần thái</span><p>Áp lực? <em>Tạo ngược lại.</em></p></div>
+				<div class="lower-item"><span class="micro-label">Chỉ số 02 / đồng đội</span><p>Gánh team <em>có điều kiện.</em></p></div>
+				<div class="lower-item"><span class="micro-label">Chỉ số 03 / học tập</span><p>Đang <em>leo rank.</em></p></div>
+			</section>
+
+			<section class="dossier" id="loadout" aria-labelledby="dossier-title">
+				<div>
+					<div class="section-kicker">01 / Bản build ngoài đời</div>
+					<h2 id="dossier-title">Aura có sẵn.<br><span>Kỹ năng đang rèn.</span></h2>
+					<p class="dossier-intro">Không nhận mình hoàn hảo. Chỉ là mỗi lần vào trận đều chơi hết mình, mỗi lần mắc lỗi thì respawn rồi làm lại. Đấy mới là chất của nhân vật chính.</p>
+				</div>
+				<div class="build" aria-label="Chỉ số vui, tự chấm">
+					<div class="section-kicker">Chỉ số vui · tự chấm</div>
+					<div class="build-row"><div class="build-row-head"><span>Độ tự tin</span><span>MAX</span></div><div class="meter"><span style="width: 96%"></span></div></div>
+					<div class="build-row"><div class="build-row-head"><span>Phản xạ combat</span><span>89 / 100</span></div><div class="meter"><span style="width: 89%"></span></div></div>
+					<div class="build-row"><div class="build-row-head"><span>Nhớ bài kiểm tra</span><span>Đang tải...</span></div><div class="meter"><span style="width: 34%"></span></div></div>
+					<div class="build-row"><div class="build-row-head"><span>Tinh thần đồng đội</span><span>100 / 100</span></div><div class="meter"><span style="width: 100%"></span></div></div>
+				</div>
+			</section>
+
+			<section class="achievements" id="achievements" aria-labelledby="achievements-title">
+				<div class="achievements-head">
+					<div><div class="section-kicker">02 / Những khoảnh khắc để đời</div><h2 id="achievements-title">Bảng vàng<br>chưa cần xác nhận.</h2></div>
+					<p>Thành tích được kể lại bởi chính nhân vật. Độ chính xác: tùy hôm, nhưng khí thế thì luôn tuyệt đối.</p>
+				</div>
+				<div class="trophy-grid">
+					<article class="trophy"><div class="trophy-number">01</div><h3>Phút 89 vẫn cháy</h3><p>Đội đang thua? Bình tĩnh. Trận chưa hết thì chưa ai được phép nản.</p></article>
+					<article class="trophy"><div class="trophy-number">02</div><h3>Gọi team là có</h3><p>Đồng đội cần là xuất hiện. Kỹ năng kết nối nhanh hơn cả mạng nhà.</p></article>
+					<article class="trophy"><div class="trophy-number">03</div><h3>Trùm giờ ra chơi</h3><p>Chuông vừa reo, chiến thuật đã sẵn. Chuông vào lớp... để tính sau.</p></article>
+				</div>
+			</section>
+
+			<section class="final-call">
+				<p>Thấy aura chưa?<span>Lobby đang mở. Thiếu đúng một đối thủ.</span></p>
+				<a href="#top">Triệu hồi nhân vật ↑</a>
+			</section>
+		</main>
+
+		<footer><span>GG thì nhớ nói, thua thì làm ván nữa.</span><span>© KietCute · Player profile</span></footer>
+	</div>
+</body>
+</html>
